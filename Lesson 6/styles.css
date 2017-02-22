@@ -1,0 +1,201 @@
+* {
+	margin: 0;
+	padding: 0;
+	font-family: 'Raleway', sans-serif;
+}
+
+.offers_container {
+	width: 900px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.offers_container h2 {
+	padding: 60px 0;
+	color:  #40525c;
+	font-size: 30px;
+	font-weight: 700;
+	line-height: 25px;
+	text-align: center;
+	text-transform: uppercase;
+}
+
+.offer {
+	position: relative;
+	display: inline-block;
+	width: 288px;
+	border: 1px solid #e8eaec;
+	border-radius: 5px;
+	background-color:  #ffffff;
+	overflow: hidden;
+	vertical-align: top;
+}
+
+.offer:hover {
+	box-shadow: 0px 0px 16px -3px #0874b2;
+}
+
+.offer-1,
+.offer-3 {
+	margin-top: 14px;
+}
+
+.offer-1 {
+	left: 5px;
+}
+
+.offer-3 {
+	left: -5px;
+}
+
+
+.offer-2 {
+	border: 4px solid #ee8129;
+	box-shadow: 0px 0px 16px -3px #0874b2;
+	z-index: 10;
+
+}
+
+.offer_name {
+	height: 63px;
+	color:  #ffffff;
+	font-size: 24px;
+	font-weight: 700;
+	line-height: 73px;
+	text-align: center;
+	text-transform: uppercase;
+}
+
+.offer-1 .offer_name {
+	background-color: #37c2d3;
+}
+
+
+.offer-2 .offer_name {
+	height: 73px;
+	background-color: #ee8129;
+}
+
+.offer-3 .offer_name {
+	background-color: #1cb79a;
+}
+
+.inner_div {
+	position: relative;
+	padding: 15px 15px 20px;
+}
+
+.text {
+	color: #3f4042;
+	font-size: 24px;
+	font-weight: 400;
+	text-align: center;
+	text-transform: uppercase;
+}
+
+.price {
+	position: relative;
+	display: inline-block;
+	margin-left: 55px;
+	margin-top: 20px;
+	margin-bottom: 40px;
+	font-family: 'Arial', sans-serif;
+	color: #35495a;
+	font-size: 72px;
+	font-weight: 700;
+	letter-spacing: -3.6px;
+	line-height: 60px;
+	text-align: center;
+}
+
+.price:before {
+	content: '$';
+	position: absolute;
+	top: -18px;
+	left: -20px;
+	color: #35495a;
+	font-size: 26px;
+}
+
+.price:after {
+	content: 'Monthly';
+	position: absolute;
+	bottom: -29px;
+	left: 72px;
+	color: #35495a;
+	font-size: 18px;
+	font-weight: 400;
+	line-height: 60px;
+	letter-spacing: 0px;
+}
+
+.services {
+	margin-bottom: 18px; 
+}
+
+.services li {
+	position: relative;
+	margin-bottom: 1px;
+	padding: 8px 15px 8px 60px;
+	color:  #888c94;
+	font-size: 15px;
+	font-weight: 400;
+	letter-spacing: 0.75px;
+	text-align: left;
+	list-style-type: none;
+	background-color: #edf5fd;
+}
+
+.services li:before {
+	content: '';
+	position: absolute;
+	top: 8px;
+	left: 30px;
+	width: 14px;
+	height: 15px;
+	background: url(check.png) no-repeat center/contain;
+}
+
+.services li:nth-child(even) {
+	background-color: #f5f5f6;
+}
+
+
+button {
+	position: relative;
+	width: 253px;
+	height: 38px;
+	border-radius: 5px;
+	border-width: 0px;
+	color: #fff;
+	font-size: 14px;
+	font-weight: 700;
+	letter-spacing: 0.7px;
+	line-height: 38px;
+	text-align: center;
+	text-transform: uppercase;
+	background-color:  #3371a6;
+	box-shadow: 0px 3px 0px 0px #16436a;
+
+}
+
+.offer-2 button {
+	margin-bottom: 10px;
+	box-shadow: 0px 3px 0px 0px #b3560b;
+	background-color: #ee8129;
+}
+
+button:hover {
+	opacity: 0.8;
+}
+
+button:active {
+	position: relative;
+	top: 3px;
+	box-shadow: 0px 0px 0px 0px #b3560b;
+}
+
+button:focus {
+	outline-style: none;
+}
+	

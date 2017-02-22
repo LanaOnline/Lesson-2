@@ -1,0 +1,90 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+.container {
+	margin: 0 auto;
+	max-width: 1400px;
+}
+
+.testimonials {
+	min-width: 525px;
+	min-height: 315px;
+	background: linear-gradient(rgba(6, 15, 22, 0.9), rgba(6, 15, 22, 0.9)),
+	linear-gradient(rgba(48, 112, 168, 0.5), rgba(48, 112, 168, 0.5)),
+	url(bg-testimonials.jpg);
+	text-align: center;
+	font-family: 'Trebuchet MS',sans-serif;
+}
+
+.testimonials h2 {
+	padding-top: 55px;
+	margin-bottom: 50px;
+	color: #3170a8;
+	font-size: 40px;
+	font-weight: 400;
+	letter-spacing: 0.4px;
+	line-height: 40px;
+	text-transform: uppercase;
+}
+
+.accent_color {
+	color: #ee8129;
+}
+
+.client_block {
+	display: inline-block;
+	min-width: 487px;
+	margin: 0 20px 20px;
+}
+
+.client_block img {
+	float: left;
+	margin-right: 25px;
+	width: 99px;
+	height: 98px;
+}
+
+.quote {
+	display: inline-block;
+	padding: 10px 15px;
+	position: relative;
+	width: 363px;
+	min-height: 98px;
+	background-color: #f7f7f7;
+	text-align: left;
+	box-sizing: border-box;	
+	color:  #666666;
+	font-size: 13px;
+	font-weight: 400;
+	letter-spacing: 0.325px;
+	line-height: 20px;
+}
+
+.quote:before {
+	content: '';
+	position: absolute;
+	top:37px;
+	left: -32px;
+	width: 0;
+	height: 0;
+	border: 17px solid transparent;
+	border-right-color: #f7f7f7;
+}
+
+.client_name {
+	padding-bottom: 5px;
+	color:  #3170a8;
+	font-size: 13px;
+	font-style: italic;
+	font-weight: bold;
+	letter-spacing: 0.325px;
+	line-height: 24px;
+	border-bottom: 1px dotted #666666;
+}
+
+.float_right {
+	display: inline-block;
+	float: right;
+}
