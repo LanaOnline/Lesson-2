@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<title>Chessboard - Svetlana Morgun</title>
+	<style>
+		.board {
+			width: 600px;
+			height: 600px;
+			line-height: 60px;
+			font-family: 'Arial', sans-serif;
+			clear:both;
+		}
+		#address {
+			position: absolute;
+			top: 10px;
+			left: 620px;
+			width: 100px;
+			height: 100px;
+			border: 1px solid #000000;
+			font-family: 'Arial', sans-serif;
+			font-size: 450%;
+			text-align: center;
+		}
+		.cell {
+			width: 60px;
+			height: 60px;
+			box-sizing: border-box;
+			font-size: 60px;
+			font-weight: 100;
+			cursor: pointer;
+		}
+		.border-top {
+			border-top: 2px solid #F9DDB5;
+		}
+		.border-bottom {
+			border-bottom: 2px solid #F9DDB5;
+		}
+		.border-left {
+			border-left: 2px solid #F9DDB5;
+		}
+		.border-right {
+			border-right: 2px solid #F9DDB5;
+		}
+		.white {
+			background-color: #F9DDB5;
+		}
+		.black {
+			background-color: #AF511A;
+		}
+		.board-border {
+			color: #F9DDB5;
+			font-size: 16px;
+			font-weight: 600;
+		}
+		.selected {
+			box-shadow: 0 0 0 3px orange inset;
+		}
+		#captured-blacks {
+			margin-bottom: 10px;
+			width: 598px;
+			height: 120px;
+			border: 1px solid #AF511A;
+			background-color: #F9DDB5;
+			clear: both;
+		}
+		#captured-whites {
+			margin-top: 10px;
+			width: 598px;
+			height: 120px;
+			border: 1px solid #AF511A;
+			background-color: #F9DDB5;
+
+		}
+		.captured-piece {
+			padding: 0;
+			margin: 0;
+			width: 60px;
+			height: 60px;
+			float: left;
+			font-size: 60px;
+			line-height: 60px;
+			cursor: pointer;
+		}
+	</style>
+</head>
+<body>
+	<script>
+	function cellSelect() {
+		var cell = document.querySelectorAll('.selected')[0];
+		var output = document.getElementById('address');
+		if (cell) {
+			cell.className = cell.className.replace(' selected','');
+		}
+		this.className += ' selected';
+		output.innerText = this.id;
+
+		var x = this.id[0];
+		var y = +this.id[1];
+		posX = findPos(col, x);
+		posY = findPos(reversedRow, y);
+	}
+
+	function cellClick() {
+		cellSelect.apply(this);
+
+		//removing figures on click
+		if (this.data) {
+			removeFigure(this);
+		}
+	}
+
+	function findPos(arr, tpos) {
+		var index = 0;
+		for (var i = 0; i < arr.length; i++) {
+			if (tpos == arr[i]) {
+				index = i;
+			}
+		}
+		return index;
+	}
+
+	function chessFigure(id, figcolor, position) {
+		var figNames = ['rook', 'knight', 'bishop', 'queen', 'king', 'bishop', 'knight', 'rook'];
+		var whiteFigs = ['\u2656', '\u2658', '\u2657', '\u2655', '\u2654', '\u2657', '\u2658', '\u2656'];
+		var blackFigs = ['\u265C', '\u265E', '\u265D', '\u265B', '\u265A', '\u265D', '\u265E', '\u265C'];
+		var newChessFigure = {
+				name: figNames[position],
+				color: figcolor,
+				position: id
+		}
+
+		if (newChessFigure.color == 'white') {
+			newChessFigure.symbol = whiteFigs[position];
+		}
+
+		if (newChessFigure.color == 'black') {
+			newChessFigure.symbol = blackFigs[position];
+		}
+		return newChessFigure;
+	}
+
+	function pawn(id, pcolor) {
+		var newPawn = {
+			color: pcolor,
+			position: id
+		}
+
+		if (newPawn.color == 'white') {
+			newPawn.symbol = '\u2659';
+		}
+
+		if (newPawn.color == 'black') {
+			newPawn.symbol = '\u265F';
+		}
+
+		return newPawn;
+	}
+
+	function removeFigure(cell) {
+		var obj = cell.data;
+		cell.innerText = '';
+		cell.data = null;
+		var capturedPiece = document.createElement('div');
+		capturedPiece.className = 'captured-piece';		
+		capturedPiece.data = obj;
+		capturedPiece.innerText = obj.symbol;
+		capturedPiece.onclick = returnFigure;
+
+		if (obj.color == 'black') {
+			capturedBlacks = document.getElementById('captured-blacks');
+			capturedBlacks.appendChild(capturedPiece);
+		}
+		if (obj.color == 'white') {
+			capturedWhites = document.getElementById('captured-whites');
+			capturedWhites.appendChild(capturedPiece);
+		}
+	}
+
+	function returnFigure(e) {
+		var obj = e.target.data;
+		e.target.remove();
+		var cell = document.getElementById(obj.position);
+		cell.data = obj;
+		cell.innerText = obj.symbol;
+	}
+
+	function drawBoard(){
+		var board = document.createElement('div');
+		board.className = 'board';
+		board.style.textAlign = 'center';
+		var address = document.createElement('div');
+		address.id = 'address';
+		var capturedBlacks = document.createElement('div');
+		capturedBlacks.id = 'captured-blacks';
+		var capturedWhites = document.createElement('div');
+		capturedWhites.id = 'captured-whites';
+
+		document.body.appendChild(capturedBlacks);
+		document.body.appendChild(board);
+		document.body.appendChild(address);
+		document.body.appendChild(capturedWhites);
+
+		var cell;
+
+		for (var i = 0; i < 10; i++) {
+			for (var j = 0; j < 10; j++) {
+				//create new cell
+				cell = document.createElement('div');
+				cell.className = 'cell';
+				cell.style.float = 'left';
+				board.appendChild(cell);
+				//mark columns
+				if (i == 0 || i == 9) {
+					cell.innerText = col[j]//x columns
+					cell.className += ' black board-border';
+				}
+				//mark rows
+				if (j == 0 || j == 9) {
+					cell.innerText = row[i];//y rows
+					cell.className += ' black board-border';
+				}
+				//draw board cells with pieces
+				if (i!=0 && i!=9 && j!=0 && j!=9) {
+					cell.id = col[j] + row[i];
+
+					if((i + j)%2) {
+						cell.className += ' white';
+					} else {
+						cell.className += ' black';							
+					}
+
+					if (i == 1) {
+						cell.className += ' border-top';
+						cell.data = chessFigure(cell.id, 'black', j-1);
+						cell.innerText = chessFigure(cell.id, 'black', j-1).symbol;
+					} else if (i == 2) {
+						cell.innerText = pawn(cell.id, 'black').symbol;//'\u265F' black pawn
+						cell.data = pawn(cell.id, 'black');
+					} else if (i == 7) {
+						cell.innerText = pawn(cell.id, 'white').symbol;//'\u2659' white pawn
+						cell.data = pawn(cell.id, 'white');
+					} else if (i == 8) {
+						cell.className += ' border-bottom';
+						cell.data = chessFigure(cell.id, 'white', j-1);
+						cell.innerText = chessFigure(cell.id, 'white', j-1).symbol;
+					}
+
+					if (j == 1) {
+						cell.className += ' border-left';
+					} else if (j == 8) {
+						cell.className += ' border-right';
+					}
+				}
+				cell.onclick = cellClick;
+			}
+		}
+	}
+
+	var col = ['', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', ''];
+	var row = ['', 8, 7, 6, 5, 4, 3, 2, 1, ''];
+	var reversedRow = row.reverse();
+	var posX = 1;
+	var posY = 1;
+
+	drawBoard();
+
+
+	window.onkeydown = function(e) {
+		
+		if (posX > 0 && posX < 9 && posY > 0 && posY < 9) {
+
+			if (posX == 1 && e.keyCode == 37) {
+				posX = 9;
+			}
+
+			if(posX == 8 && e.keyCode == 39) {
+				posX = 0;
+			}
+
+			if (posY == 1 && e.keyCode == 38) {
+				posY = 9;
+			}
+			
+			if (posY == 8 && e.keyCode == 40) {
+				posY = 0;
+			}
+
+			switch(e.keyCode) {
+				case 37: //left
+					posX -= 1;
+					break;
+				case 38: //up
+					posY -= 1;
+					break;
+				case 39: //right
+					posX += 1;
+					break;
+				case 40: //down
+					posY += 1;
+					break;
+			}
+		}
+
+		var id = col[posX] + row[posY];
+		var cell = document.getElementById(id);
+		
+		if (cell) {
+			cellSelect.apply(cell);
+		}
+	}
+	</script>
+	
+</body>
+</html>
