@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>JS2 HW1 Svetlana Morgun</title>
+</head>
+<body>
+	<input class="textinput" type="text"/>
+	<button id="test">Value to console</button>
+	<script>
+	function Field() {
+		var textInput = document.querySelector('.textinput'),
+			checkBox = document.createElement('input');
+
+		checkBox.setAttribute('type', 'checkbox');
+		textInput.parentNode.insertBefore(checkBox, textInput);
+		textInput.setAttribute('disabled', 'disabled');
+
+		function DisableInput() {
+			textInput.setAttribute('disabled', 'disabled');
+		}
+
+		function EnableInput() {
+			textInput.removeAttribute('disabled');
+		}
+
+		checkBox.onchange = function() {
+			if (checkBox.checked) {
+				EnableInput();
+			} else {
+				DisableInput();
+			}
+		}
+
+		this.value = function() {
+			if (checkBox.checked) {
+				return textInput.value;
+			} else {
+				return null;
+			}
+		}
+	}
+
+	var field = new Field();
+	var testButton = document.getElementById('test');
+	testButton.onclick = function() {
+		console.log(field.value());
+	}
+	</script>
+</body>
+</html>
