@@ -8,8 +8,8 @@
 	<input class="textinput" type="text"/>
 	<button id="test">Value to console</button>
 	<script>
-	function Field() {
-		var textInput = document.querySelector('.textinput'),
+	function Field(selector) {
+		var textInput = document.querySelector(selector),
 			checkBox = document.createElement('input');
 
 		checkBox.setAttribute('type', 'checkbox');
@@ -41,7 +41,7 @@
 		}
 	}
 
-	var field = new Field();
+	var field = new Field('.textinput');
 	var testButton = document.getElementById('test');
 	testButton.onclick = function() {
 		console.log(field.value());
