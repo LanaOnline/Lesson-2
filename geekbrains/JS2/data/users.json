@@ -1,0 +1,10 @@
+[
+{
+	userlogin: adminlogin,
+	password: admin
+},
+{
+	userlogin: username1,
+	password: 123
+}
+]
