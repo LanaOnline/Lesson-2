@@ -1,10 +1,10 @@
 [
 {
-	userlogin: adminlogin,
-	password: admin
+	"userlogin": "adminlogin",
+	"password": "admin"
 },
 {
-	userlogin: username1,
-	password: 123
+	"userlogin": "username1",
+	"password": 123
 }
 ]
