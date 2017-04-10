@@ -61,10 +61,9 @@
 						alert( xhr.status + ': ' + xhr.statusText );
 					} else {
 						users = JSON.parse(xhr.responseText);
-						console.dir(users);
-						console.log(login);
-						if (users.some(function(item) {
-							return item === login;
+
+						if (users.find(function(item) {
+							return item.userlogin === login;
 						})) {
 							updateMsg(3);
 						} else {
