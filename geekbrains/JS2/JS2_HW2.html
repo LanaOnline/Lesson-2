@@ -10,7 +10,9 @@
 
 	function CheckLoginAvailability(selector) {
 		var _this = this;
-
+		var xhr = new XMLHttpRequest(),
+			checkTimer;
+		
 		this.textInput = document.querySelector(selector);
 		this.msg = document.createElement('span');
 		this.textInput.parentNode.appendChild(_this.msg);
@@ -36,42 +38,43 @@
 				_this.msg.innerText = '';
 		}
 
-		var xhr = new XMLHttpRequest();
-		
 		this.textInput.onkeyup = function() {
 			var login = this.value,
 				users = [];
-
-			xhr.open('GET', 'data/users.json', true);
-			xhr.setRequestHeader('Content-Type', 'application/json');
-			xhr.send();
-			xhr.timeout = 1000;
-			xhr.ontimeout = function() {
-
+				
+			if (checkTimer) {
+				clearTimeout(checkTimer);
 			}
-			xhr.onreadystatechange = function() {
-	            if (xhr.readyState != 4) return;
 
-				if (login.length == 0) {
-					deleteMsg();
-				} else if (login.length >= 1 && login.length < 6) {
-					updateMsg(1);
-				} else if (login.length >= 6) {
-					if (xhr.status != 200) {
-						alert( xhr.status + ': ' + xhr.statusText );
-					} else {
-						users = JSON.parse(xhr.responseText);
+			checkTimer = setTimeout(function() {
+				xhr.open('GET', 'data/users.json', true);
+				xhr.setRequestHeader('Content-Type', 'application/json');
+				xhr.send();
+				
+				xhr.onreadystatechange = function() {
+		            if (xhr.readyState != 4) return;
 
-						if (users.find(function(item) {
-							return item.userlogin === login;
-						})) {
-							updateMsg(3);
+					if (login.length == 0) {
+						deleteMsg();
+					} else if (login.length >= 1 && login.length < 6) {
+						updateMsg(1);
+					} else if (login.length >= 6) {
+						if (xhr.status != 200) {
+							alert( xhr.status + ': ' + xhr.statusText );
 						} else {
-							updateMsg(2);
+							users = JSON.parse(xhr.responseText);
+
+							if (users.find(function(item) {
+								return item.userlogin === login;
+							})) {
+								updateMsg(3);
+							} else {
+								updateMsg(2);
+							}
 						}
 					}
 				}
-			}
+			}, 1000);
 		}
 	}
 
