@@ -45,7 +45,10 @@
 			xhr.open('GET', 'data/users.json', true);
 			xhr.setRequestHeader('Content-Type', 'application/json');
 			xhr.send();
-			
+			xhr.timeout = 1000;
+			xhr.ontimeout = function() {
+
+			}
 			xhr.onreadystatechange = function() {
 	            if (xhr.readyState != 4) return;
 
@@ -60,7 +63,9 @@
 						users = JSON.parse(xhr.responseText);
 						console.dir(users);
 						console.log(login);
-						if (login in users) {
+						if (users.some(function(item) {
+							return item === login;
+						})) {
 							updateMsg(3);
 						} else {
 							updateMsg(2);
