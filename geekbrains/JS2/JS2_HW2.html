@@ -17,31 +17,34 @@
 		this.msg = document.createElement('span');
 		this.textInput.parentNode.appendChild(_this.msg);
 
-		function updateMsg(avail) {
-			switch (avail) {
-				case 1: 
-					_this.msg.innerText = 'Enter at least 6 characters';
-					_this.msg.style.color = 'black';
-					break;
-				case 2: 
-					_this.msg.innerText = 'Available login!';
-					_this.msg.style.color = 'green';
-					break;
-				case 3:
-					_this.msg.innerText = 'This login is reserved. Try another one.';
-					_this.msg.style.color = 'red';
-					break;
+		var messages = [
+			{ 
+				message: 'Enter at least 6 characters',
+				color: 'black'
+			},
+			{ 
+				message: 'Available login!',
+				color: 'green'
+			},
+			{ 
+				message: 'This login is reserved. Try another one.',
+				color: 'red'
 			}
+		];
+
+		function updateMsg(avail) {
+			_this.msg.innerText = messages[avail].message;
+			_this.msg.style.color = messages[avail].color;
 		}
 
 		function deleteMsg() {
-				_this.msg.innerText = '';
+			_this.msg.innerText = '';
 		}
 
 		this.textInput.onkeyup = function() {
 			var login = this.value,
 				users = [];
-				
+
 			if (checkTimer) {
 				clearTimeout(checkTimer);
 			}
@@ -52,29 +55,31 @@
 				xhr.send();
 				
 				xhr.onreadystatechange = function() {
-		            if (xhr.readyState != 4) return;
+		            if (xhr.readyState != 4) {
+		            	return;
+		            }
+
+					if (xhr.status != 200) {
+						alert( xhr.status + ': ' + xhr.statusText );
+					}
 
 					if (login.length == 0) {
 						deleteMsg();
 					} else if (login.length >= 1 && login.length < 6) {
-						updateMsg(1);
+						updateMsg(0);
 					} else if (login.length >= 6) {
-						if (xhr.status != 200) {
-							alert( xhr.status + ': ' + xhr.statusText );
-						} else {
-							users = JSON.parse(xhr.responseText);
+						users = JSON.parse(xhr.responseText);
 
-							if (users.find(function(item) {
-								return item.userlogin === login;
-							})) {
-								updateMsg(3);
-							} else {
-								updateMsg(2);
-							}
+						if (users.some(function(item) {
+							return item.userlogin === login;
+						})) {
+							updateMsg(2);
+						} else {
+							updateMsg(1);
 						}
 					}
 				}
-			}, 1000);
+			}, 600);
 		}
 	}
 
