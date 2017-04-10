@@ -58,10 +58,12 @@
 						alert( xhr.status + ': ' + xhr.statusText );
 					} else {
 						users = JSON.parse(xhr.responseText);
+						console.dir(users);
+						console.log(login);
 						if (login in users) {
 							updateMsg(3);
 						} else {
-						updateMsg(2);
+							updateMsg(2);
 						}
 					}
 				}
