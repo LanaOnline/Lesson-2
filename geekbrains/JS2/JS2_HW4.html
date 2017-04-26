@@ -35,8 +35,8 @@
 		}).done(function(response) {
 			var terms = response.map(function(term) { return term.term; });
 
-			$('p', article).each(function(i, item) {
-				var words = $(item).html.split(' '),
+			$('p', article).each(function(i) {
+				var words = $(i).text.split(' '),
 					termsWrapped = false;
 
 				words = words.map(function(word) {
