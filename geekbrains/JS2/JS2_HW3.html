@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>JS2HW3 - Shopping Lists - Svetlana Morgun</title>
+	<style>
+		body {
+			margin:0;
+			padding: 20px;
+		}
+		.btn.addlist {
+			margin-bottom: 40px;
+		}
+		.shopping-list {
+			/*display: inline-block;*/
+			width: 300px;
+		}
+
+		.list-header {
+			text-transform: uppercase;
+			font-weight: 600;
+		}
+
+		.newname {
+			width: 190px;
+			border-style: none;
+		}
+
+		.newname:focus,
+		.newcount:focus {
+			outline-style: none;
+		}
+
+		.newcount {
+			width: 68px;
+			border-style: none;
+		}
+
+		.add-item-btn {
+			font-weight: 600;
+			cursor: pointer;
+		}
+
+		input[type="checkbox"] + span {
+			padding-left: 8px;
+			vertical-align: text-bottom;
+		}
+
+		.cross-out {
+			color:#cccccc;
+			text-decoration: line-through;
+		}
+	</style>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<body>
+	<button class="addlist btn btn-primary">Добавить новый список</button><br>
+
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+	<script>
+		$(function() {
+
+			/**
+			 * Adds checkbox to the text, crosses out list items.
+			 * @constructor
+			 * @param {string} txt - The text typed in by user.
+			 */
+			function CreateListItem(txt) {
+				var _this = this;
+				this.toggle = $('<input/>', {
+					class: 'toggle',
+					type: 'checkbox'
+				});
+				this.item = $('<span/>').text(txt);
+				this.newlistItem = $('<li/>', {class: 'list-group-item'});
+				this.newlistItem.append(this.toggle);
+				this.newlistItem.append(this.item);
+
+				this.toggle.change(function() {
+					if ($(_this.toggle).is(':checked')) {
+						$(_this.item).addClass('cross-out');
+					} else {
+						$(_this.item).removeClass('cross-out');
+					}
+				});
+
+				return this.newlistItem;
+			}
+
+			$('.addlist').click(function() {
+				var list = $('<ul/>', {class: 'list-group shopping-list'}),
+					listEditor = $('<li/>', {class: 'list-group-item list-editor'}),
+					newlistItemName = $('<input/>', {
+						class: 'newname', 
+						type: 'text', 
+						placeholder: 'Наименование'
+					}),
+					newlisItemCount = $('<input/>', {
+						class: 'newcount', 
+						type: 'text', 
+						placeholder: 'Кол-во'
+					}),
+					addItemBtn = $('<span/>', {
+								class: 'add-item-btn',
+								text: '+'
+							});
+
+				list.append($('<li/>', {
+					class: 'list-group-item list-header',
+					text: 'Список покупок',
+					contenteditable: 'true'
+					})
+				).append(
+					$(listEditor).append(
+							$(newlistItemName)
+						).append(
+							$(newlisItemCount)
+						).append(
+							$(addItemBtn).on('click', function() {
+								var newText = $(newlistItemName).val() + ' - ' + $(newlisItemCount).val(),
+									listItem = new CreateListItem(newText);
+
+								listItem.insertBefore(listEditor);
+								$(newlistItemName).val('');
+								$(newlisItemCount).val('');
+								})
+						)
+				);
+
+				$(list).insertAfter($(this));
+			});
+			
+		});
+	</script>
+</body>
+</html>
