@@ -43,9 +43,9 @@
 			var terms = response.map(function(item) { return item.term; });
 
 			$('p', article).each(function(i, val) {
-				var words = $(val).html().split(' ').toLowerCase().replace(',', '').replace('.', '').replace('-', ''),
+				var words = $(val).html().split(' '),
 					termsWrapped = false;
-
+// .toLowerCase().replace(',', '').replace('.', '').replace('-', '')
 				words = words.map(function(value) {
 					var index = terms.indexOf(value);
 
