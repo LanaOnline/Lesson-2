@@ -55,10 +55,11 @@
 							text: value,
 							'data-term': response[index].data
 						}).html();
-						
+						console.log(wrappedTerm);
+
 						termsWrapped = true;
 
-						return wrappedTerm;
+						return wrappedTerm.innerHTML;
 						// $('<span/>', {
 						// 	class: 'term-wrapper',
 						// 	text: value,
