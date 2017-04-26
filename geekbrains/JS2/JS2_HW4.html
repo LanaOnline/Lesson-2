@@ -30,7 +30,7 @@
 
 		$.ajax({
 			url: '4/terms.json',
-			method: 'POST',
+			method: 'GET',
 			dataType: 'json'
 		}).done(function(response) {
 			var terms = response.map(function(term) { return term.term; });
