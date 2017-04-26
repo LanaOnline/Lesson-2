@@ -17,7 +17,7 @@
 			position: absolute;
 			top: 1.5em;
 			left:0;
-			background-color: #fff;
+			background-color: #fffdcc;
 			border: 1px solid black;
 		}
 	</style>
@@ -40,26 +40,33 @@
 			method: 'GET',
 			dataType: 'json'
 		}).done(function(response) {
-			var terms = response.map(function(term) { return term.term; });
+			var terms = response.map(function(item) { return item.term; });
 
 			$('p', article).each(function(i, val) {
-				var words = $(val).html().split(' '),
+				var words = $(val).html().split(' ').toLowerCase().replace(',', '').replace('.', '').replace('-', ''),
 					termsWrapped = false;
 
-				words = words.map(function(word) {
-					var index = terms.indexOf(word.toLowerCase().replace(',', '').replace('.', '').replace('-', ''));
+				words = words.map(function(value) {
+					var index = terms.indexOf(value);
 
 					if (index !== -1) {
+						var wrappedTerm = $(value).wrap('<span/>', {
+							class: 'term-wrapper',
+							text: value,
+							'data-term': response[index].data
+						});
+						console.log(wrappedTerm);
 						termsWrapped = true;
 
-						return $('<span/>', {
-							class: 'term-wrapper',
-							text: word,
-							'data-term': response[index].data
-						})[0].outerHTML;
+						return wrappedTerm;
+						// $('<span/>', {
+						// 	class: 'term-wrapper',
+						// 	text: value,
+						// 	'data-term': response[index].data
+						// })[0].outerHTML;
 					}
 
-					return word;
+					return value;
 				});
 
 				if (termsWrapped) $(val).html(words.join(' '));
