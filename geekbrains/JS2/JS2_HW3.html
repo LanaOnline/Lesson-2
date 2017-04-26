@@ -78,11 +78,7 @@
 				this.newlistItem.append(this.item);
 
 				this.toggle.change(function() {
-					if ($(_this.toggle).is(':checked')) {
-						$(_this.item).addClass('cross-out');
-					} else {
-						$(_this.item).removeClass('cross-out');
-					}
+					$(_this.item).toggleClass('cross-out');
 				});
 
 				return this.newlistItem;
