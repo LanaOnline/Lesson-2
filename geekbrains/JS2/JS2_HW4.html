@@ -9,6 +9,8 @@
 			text-decoration: underline;
 			text-decoration-style: dashed;
 			text-decoration-color: purple;
+			cursor: pointer;
+			font-style: italic;
 		}
 
 		.tooltip {
@@ -76,7 +78,7 @@
 				method: 'GET',
 				dataType: 'json'
 			}).done(function(response) {
-				$('.tooltip', $(this)).html(response.description);
+				&(tooltip).text(response.description);
 			}).fail(function() {
 				$('.tooltip', $(this)).append($('<p/>', { text: 'Error'}));
 			});
