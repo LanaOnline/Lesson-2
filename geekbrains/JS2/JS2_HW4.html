@@ -78,7 +78,7 @@
 				method: 'GET',
 				dataType: 'json'
 			}).done(function(response) {
-				&(tooltip).text(response.description);
+				tooltip.text(response.description);
 			}).fail(function() {
 				$('.tooltip', $(this)).append($('<p/>', { text: 'Error'}));
 			});
