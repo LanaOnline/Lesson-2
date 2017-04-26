@@ -5,13 +5,16 @@
 	<title>JS2HW4 - Tooltips - Svetlana Morgun</title>
 	<style>
 		.article .term-wrapper {
+			position: relative;
 			text-decoration: underline;
 			text-decoration-style: dashed;
 			text-decoration-color: purple;
 		}
 
 		.tooltip {
-
+			position: absolute;
+			top: 10px;
+			background-color: #fff;
 		}
 	</style>
 </head>
@@ -36,7 +39,7 @@
 			var terms = response.map(function(term) { return term.term; });
 
 			$('p', article).each(function(i, val) {
-				var words = $(val).html.split(' '),
+				var words = $(val).html().split(' '),
 					termsWrapped = false;
 
 				words = words.map(function(word) {
@@ -66,11 +69,21 @@
 		$(document).on('mouseenter', '.article .term-wrapper', function() {
 			var tooltip = $('<div/>', { class: 'tooltip', text: ''});
 
+			$(this).append(tooltip);
 
+			$.ajax({
+				url: '4/' + $(this).data('term'),
+				method: 'GET',
+				dataType: 'json'
+			}).done(function(response) {
+				$('.tooltip', $(this)).html(response.description);
+			}).fail(function() {
+				$('.tooltip', $(this)).append($('<p/>', { text: 'Error'}));
+			});
 		});
 
 		$(document).on('mouseleave', '.article .term-wrapper', function() {
-			
+			$('.tooltip', $(this)).remove();
 		});
 
 	});
