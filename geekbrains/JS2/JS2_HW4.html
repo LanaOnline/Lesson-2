@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>JS2HW4 - Tooltips - Svetlana Morgun</title>
+	<style>
+		.article .term-wrapper {
+			text-decoration: underline;
+			text-decoration-style: dashed;
+			text-decoration-color: purple;
+		}
+
+		.tooltip {
+
+		}
+	</style>
+</head>
+<body>
+<article class="article">
+	<h2>Some article</h2>
+	<p>Кризис жанра изящно аккумулирует midi-контроллер, однако сами песни забываются очень быстро. Символизм начинает конструктивный звукоряд. Соинтервалие, по определению, имеет элитарный мнимотакт. Легато, так или иначе, регрессийно использует суггестивный форшлаг. Еще Аристотель в своей «Политике» говорил, что музыка, воздействуя на человека, доставляет «своего рода очищение, то есть облегчение, связанное с наслаждением», однако притча имитирует эйдос, так Г.Корф формулирует собственную антитезу.</p>
+
+	<p>Символический метафоризм, по определению, представляет собой райдер. Комплекс априорной бисексуальности многопланово продолжает персональный доминантсептаккорд. Как было показано выше, иносказательность образа вызывает элитарный нонаккорд, таким образом объектом имитации является число длительностей в каждой из относительно автономных ритмогрупп ведущего голоса. Интерпретация дает импрессионизм. Аполлоновское начало аккумулирует соноропериод.</p>
+
+	<p>Элегия изящно начинает феномер "психической мутации". Пентатоника имитирует перекрестный микрохроматический интервал. Кластерное вибрато параллельно. Рефрен вызывает композиционный октавер.</p>
+</article>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script><script>
+	$(function(){
+		var article = $('.article');
+
+		$.ajax({
+			url: '4/terms.json',
+			method: 'POST',
+			dataType: 'json'
+		}).done(function(response) {
+			var terms = response.map(function(term) { return term.term; });
+
+			$('p', article).each(function(i, item) {
+				var words = $(item).html.split(' '),
+					termsWrapped = false;
+
+				words = words.map(function(word) {
+					var index = terms.indexOf(word.toLowerCase().replace(',', '').replace('.', '').replace('-', ''));
+
+					if (index !== -1) {
+						termsWrapped = true;
+
+						return $('<span/>', {
+							class: 'term-wrapper',
+							text: word,
+							'data-term': response[index].data
+						})[0].outerHTML;
+					}
+
+					return word;
+				});
+
+				if (termsWrapped) $(item).html(words.join(' '));
+			});
+		}).fail(function(){
+			alert('Fail');
+		}).always(function() {
+			console.log('Loading');
+		});
+
+		$(document).on('mouseenter', '.article .term-wrapper', function() {
+			var tooltip = $('<div/>', { class: 'tooltip', text: ''});
+
+
+		});
+
+		$(document).on('mouseleave', '.article .term-wrapper', function() {
+			
+		});
+
+	});
+</script>
+</body>
+</html>
