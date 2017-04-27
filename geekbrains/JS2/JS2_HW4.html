@@ -17,7 +17,8 @@
 			position: absolute;
 			top: 1em;
 			left:0;
-			width: 50%;
+			max-width: 320px;
+			word-wrap: break-word;
 			padding: 0 5px;
 			background-color: #fffdcc;
 			border: 1px solid black;
@@ -85,7 +86,7 @@
 			}).done(function(response) {
 				var tiptext = response.description;
 
-				if (response.url) tiptext += '<br>' + response.url;
+				if (response.url) tiptext += '<br>' + '<a href=' + response.url + '>Подробнее...</a>';
 				if (response.picture) tiptext += '<br>' + response.picture;
 
 				tooltip.html(tiptext);
