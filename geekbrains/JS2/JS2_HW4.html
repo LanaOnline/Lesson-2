@@ -49,7 +49,7 @@
 
 			$('p', article).each(function(i, val) {
 
-				var newHTML = $(val).html().replace(/(\w+)/gi, function(value) {
+				var newHTML = $(val).html().replace(/([A-Za-zА-Яа-я]+)/gi, function(value) {
 					var index = terms.indexOf(value);
 
 					if (index !== -1) {
