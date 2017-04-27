@@ -43,12 +43,12 @@
 			var terms = response.map(function(item) { return item.term; });
 
 			$('p', article).each(function(i, val) {
-				var words = $(val).html().split(' '),
+				var words = $(val).html().toLowerCase().replace('.',' ').replace(',',' ').replace('-',' ').split(' '),
 					termsWrapped = false;
 
 				words = words.map(function(value) {
-					var index = terms.indexOf(value.toLowerCase().replace(',', '').replace('.', '').replace('-', ''));
-
+					var index = terms.indexOf(value);
+					
 					if (index !== -1) {
 						var wrappedTerm = $('<span/>', {
 							class: 'term-wrapper',
