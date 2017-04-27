@@ -68,8 +68,6 @@
 			});
 		}).fail(function(){
 			alert('Fail');
-		}).always(function() {
-			console.log('Loading');
 		});
 
 		$(document).on('mouseenter', '.article .term-wrapper', function() {
@@ -84,9 +82,7 @@
 			}).done(function(response) {
 				tooltip.text(response.description);
 			}).fail(function() {
-				var tooltip = $('<div/>', { class: 'tooltip', text: 'Error'});
-
-				$(this).append(tooltip);
+				tooltip.text('Error');
 			});
 		});
 
