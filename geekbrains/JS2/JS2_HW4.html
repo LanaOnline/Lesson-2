@@ -45,18 +45,17 @@
 			$('p', article).each(function(i, val) {
 				var words = $(val).html().split(' '),
 					termsWrapped = false;
-// .toLowerCase().replace(',', '').replace('.', '').replace('-', '')
+
 				words = words.map(function(value) {
-					var index = terms.indexOf(value);
+					var index = terms.indexOf(value.toLowerCase().replace(',', '').replace('.', '').replace('-', ''));
 
 					if (index !== -1) {
-						var wrappedTerm = $(value).wrap('<span/>', {
+						var wrappedTerm = $('<span/>', {
 							class: 'term-wrapper',
 							text: value,
 							'data-term': response[index].data
-						}).html();
-						console.log(wrappedTerm);
-
+						})
+							
 						termsWrapped = true;
 
 						return wrappedTerm;
