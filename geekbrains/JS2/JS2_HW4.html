@@ -44,22 +44,20 @@
 
 			$('p', article).each(function(i, val) {
 				var words = $(val).html().toLowerCase().replace('.',' ').replace(',',' ').replace('-',' ').split(' '),
-					termsWrapped = false;
+					termWrapped = false;
 
 				words = words.map(function(value) {
 					var index = terms.indexOf(value);
-					
+
 					if (index !== -1) {
 						var wrappedTerm = $('<span/>', {
 							class: 'term-wrapper',
 							text: value,
 							'data-term': response[index].data
 						}),
-							tmpParent = $('<div/');
-
-						tmpParent.appendChild(wrappedTerm);
+							tmpParent = $('<div/>').append(wrappedTerm);
 							
-						termsWrapped = true;
+						termWrapped = true;
 
 						return tmpParent.innerHTML;
 						// $('<span/>', {
