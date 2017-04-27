@@ -55,8 +55,9 @@
 							text: value,
 							'data-term': response[index].data
 						}),
-							tmpParent = $('<div/>').append(wrappedTerm);
-							
+							tmpParent = $('<div/>');
+
+						tmpParent.append(wrappedTerm);
 						termWrapped = true;
 
 						return tmpParent.innerHTML;
