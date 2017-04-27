@@ -17,6 +17,7 @@
 			position: absolute;
 			top: 1em;
 			left:0;
+			width: 50%;
 			padding: 0 5px;
 			background-color: #fffdcc;
 			border: 1px solid black;
@@ -86,8 +87,8 @@
 
 				if (response.url) tiptext += '<br>' + response.url;
 				if (response.picture) tiptext += '<br>' + response.picture;
-				
-				tooltip.text(tiptext);
+
+				tooltip.html(tiptext);
 
 			}).fail(function() {
 				tooltip.text('Определение не найдено');
