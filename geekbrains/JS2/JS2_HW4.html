@@ -22,6 +22,7 @@
 			padding: 0 5px;
 			background-color: #fffdcc;
 			border: 1px solid black;
+			z-index: 10;
 		}
 	</style>
 </head>
@@ -47,10 +48,8 @@
 			var terms = response.map(function(item) { return item.term; });
 
 			$('p', article).each(function(i, val) {
-				var words = $(val).html().toLowerCase().replace('.',' ').replace(',',' ').replace('-',' ').split(' '),
-					termWrapped = false;
 
-				words = words.map(function(value) {
+				var newHTML = $(val).html().replace(/(\w)+/gi, function(value) {
 					var index = terms.indexOf(value);
 
 					if (index !== -1) {
@@ -68,7 +67,32 @@
 					return value;
 				});
 
-				if (termWrapped) $(val).html(words.join(' '));
+				$(val).html(newHTML);
+
+				// var words = $(val).html().toLowerCase().replace('.',' ').replace(',',' ').replace('-',' ').split(' '),
+				// 	termWrapped = false;
+
+				// 	words = new RegEx();
+
+				// words = words.map(function(value) {
+				// 	var index = terms.indexOf(value);
+
+				// 	if (index !== -1) {
+				// 		var tmpParent = $('<div/>').append($('<span/>', {
+				// 			class: 'term-wrapper',
+				// 			text: value,
+				// 			'data-term': response[index].data
+				// 		}));
+
+				// 		termWrapped = true;
+						
+				// 		return $(tmpParent).html();
+				// 	}
+
+				// 	return value;
+				// });
+
+				// if (termWrapped) $(val).html(words.join(' '));
 			});
 		}).fail(function(){
 			alert('Fail');
@@ -97,7 +121,7 @@
 		});
 
 		$(document).on('mouseleave', '.article .term-wrapper', function() {
-			$('.tooltip', $(this)).remove();
+			$('.tooltip', $(this)).fadeOut().remove();
 		});
 	});
 </script>
