@@ -54,11 +54,14 @@
 							class: 'term-wrapper',
 							text: value,
 							'data-term': response[index].data
-						})
+						}),
+							tmpParent = $('<div/');
+
+						tmpParent.appendChild(wrappedTerm);
 							
 						termsWrapped = true;
 
-						return wrappedTerm;
+						return tmpParent.innerHTML;
 						// $('<span/>', {
 						// 	class: 'term-wrapper',
 						// 	text: value,
