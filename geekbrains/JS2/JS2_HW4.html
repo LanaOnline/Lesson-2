@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
 	<meta charset="UTF-8">
 	<title>JS2HW4 - Tooltips - Svetlana Morgun</title>
@@ -49,7 +49,7 @@
 
 			$('p', article).each(function(i, val) {
 
-				var newHTML = $(val).html().replace(/(\w)+/gi, function(value) {
+				var newHTML = $(val).html().replace(/(\w+)/gi, function(value) {
 					var index = terms.indexOf(value);
 
 					if (index !== -1) {
