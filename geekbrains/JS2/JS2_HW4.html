@@ -50,14 +50,12 @@
 					var index = terms.indexOf(value);
 
 					if (index !== -1) {
-						var wrappedTerm = $('<span/>', {
+						var tmpParent = $('<div/>').append($('<span/>', {
 							class: 'term-wrapper',
 							text: value,
 							'data-term': response[index].data
-						}),
-							tmpParent = $('<div/>');
+						}));
 
-						$(tmpParent).append(wrappedTerm);
 						termWrapped = true;
 						console.log(tmpParent.innerHTML);
 						return tmpParent.innerHTML;
