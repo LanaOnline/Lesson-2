@@ -8,7 +8,7 @@
 			position: relative;
 			text-decoration: underline;
 			text-decoration-style: dotted;
-			text-decoration-color: green;
+			text-decoration-color: orange;
 			cursor: pointer;
 			font-style: italic;
 		}
@@ -17,6 +17,7 @@
 			position: absolute;
 			top: 1em;
 			left:0;
+			padding: 0 5px;
 			background-color: #fffdcc;
 			border: 1px solid black;
 		}
@@ -31,7 +32,8 @@
 
 	<p>Элегия изящно начинает феномер "психической мутации". Пентатоника имитирует перекрестный микрохроматический интервал. Кластерное вибрато параллельно. Рефрен вызывает композиционный октавер.</p>
 </article>
-<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script><script>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+<script>
 	$(function(){
 		var article = $('.article');
 
@@ -80,7 +82,13 @@
 				method: 'GET',
 				dataType: 'json'
 			}).done(function(response) {
-				tooltip.text(response.description);
+				var tiptext = response.description;
+
+				if (response.url) tiptext += '<br>' + response.url;
+				if (response.picture) tiptext += '<br>' + response.picture;
+				
+				tooltip.text(tiptext);
+
 			}).fail(function() {
 				tooltip.text('Определение не найдено');
 			});
@@ -89,7 +97,6 @@
 		$(document).on('mouseleave', '.article .term-wrapper', function() {
 			$('.tooltip', $(this)).remove();
 		});
-
 	});
 </script>
 </body>
