@@ -15,13 +15,12 @@
 
 		.tooltip {
 			position: absolute;
-			min-width: 320px;
+			min-width: 260px;
 			word-wrap: break-word;
 			padding: 0 5px;
 			background-color: #fffdcc;
 			border: 1px solid black;
 			z-index: 10;
-			overflow-y: scroll;
 		}
 
 		.tooltip img {
@@ -84,8 +83,7 @@
 				posY = e.clientY;
 			
 			tooltip.css('max-width', 0.4*widthX);
-			tooltip.css('max-height', 0.4*heightY);
-
+			
 			if (posX > widthX/2) {
 				tooltip.css('right','0');
 			} else {
