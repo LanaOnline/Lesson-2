@@ -42,7 +42,7 @@
 <script>
 	$(function(){
 		var article = $( '.article' );
-
+		//find terms and wrap them in spans
 		$.ajax({
 			url: '4/terms.json',
 			method: 'GET',
@@ -51,7 +51,7 @@
 			var terms = response.map(function(item) { return item.term; });
 
 			$( 'p', article ).each(function(i, val) {
-
+				//replace matching terms with spans
 				var newHTML = $( val ).html().replace(/([A-Za-zА-Яа-я]+)/gi, function(value) {
 					var index = terms.indexOf(value);
 
@@ -64,17 +64,16 @@
 						
 						return $( tmpParent ).html();
 					}
-
 					return value;
 				});
-
+				//new html
 				$( val ).html(newHTML);
 			});
 
 		}).fail(function(){
-			alert('Fail');
+			alert('Файл с терминами не найден');
 		});
-
+		//display tooltip
 		$( document ).on('mouseenter', '.article .term-wrapper', function(e) {
 			var tooltip = $( '<div/>', { class: 'tooltip', text: '' } ),
 				widthX = $( window ).width(),
@@ -111,10 +110,10 @@
 				tooltip.html(tiptext);
 
 			}).fail(function() {
-				tooltip.text('Определение не найдено');
+				tooltip.text('Описание не найдено');
 			});
 		});
-
+		//tooltip removal
 		$( document ).on('mouseleave', '.article .term-wrapper', function() {
 			$( '.tooltip', $( this ) ).fadeOut().remove();
 		});
