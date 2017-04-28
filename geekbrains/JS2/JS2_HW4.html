@@ -15,8 +15,6 @@
 
 		.tooltip {
 			position: absolute;
-			top: 1em;
-			left:0;
 			max-width: 320px;
 			word-wrap: break-word;
 			padding: 0 5px;
@@ -38,7 +36,7 @@
 <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 <script>
 	$(function(){
-		var article = $('.article');
+		var article = $( '.article' );
 
 		$.ajax({
 			url: '4/terms.json',
@@ -47,64 +45,54 @@
 		}).done(function(response) {
 			var terms = response.map(function(item) { return item.term; });
 
-			$('p', article).each(function(i, val) {
+			$( 'p', article ).each(function(i, val) {
 
-				var newHTML = $(val).html().replace(/([A-Za-zА-Яа-я]+)/gi, function(value) {
+				var newHTML = $( val ).html().replace(/([A-Za-zА-Яа-я]+)/gi, function(value) {
 					var index = terms.indexOf(value);
 
 					if (index !== -1) {
-						var tmpParent = $('<div/>').append($('<span/>', {
+						var tmpParent = $( '<div/>' ).append($( '<span/>', {
 							class: 'term-wrapper',
 							text: value,
 							'data-term': response[index].data
-						}));
-
-						termWrapped = true;
+						} ));
 						
-						return $(tmpParent).html();
+						return $( tmpParent ).html();
 					}
 
 					return value;
 				});
 
-				$(val).html(newHTML);
-
-				// var words = $(val).html().toLowerCase().replace('.',' ').replace(',',' ').replace('-',' ').split(' '),
-				// 	termWrapped = false;
-
-				// 	words = new RegEx();
-
-				// words = words.map(function(value) {
-				// 	var index = terms.indexOf(value);
-
-				// 	if (index !== -1) {
-				// 		var tmpParent = $('<div/>').append($('<span/>', {
-				// 			class: 'term-wrapper',
-				// 			text: value,
-				// 			'data-term': response[index].data
-				// 		}));
-
-				// 		termWrapped = true;
-						
-				// 		return $(tmpParent).html();
-				// 	}
-
-				// 	return value;
-				// });
-
-				// if (termWrapped) $(val).html(words.join(' '));
+				$( val ).html(newHTML);
 			});
+
 		}).fail(function(){
 			alert('Fail');
 		});
 
-		$(document).on('mouseenter', '.article .term-wrapper', function() {
-			var tooltip = $('<div/>', { class: 'tooltip', text: ''});
-
-			$(this).append(tooltip);
+		$( document ).on('mouseenter', '.article .term-wrapper', function(e) {
+			var tooltip = $( '<div/>', { class: 'tooltip', text: '' } ),
+			widthX = $( window ).width(),
+			heightY = $( window ).height(),
+			posX = e.clientX,
+			posY = e.clientY;
+			
+			if (posX > widthX/2) {
+				tooltip.style.right = 0;
+			} else {
+				tooltip.style.left = 0;
+			}
+			
+			if (posY > heightY) {
+				tooltip.style.bottom = 1em;
+			} else {
+				tooltip.style.top = 1em;
+			}
+			
+			$( this ).append(tooltip);
 
 			$.ajax({
-				url: '4/' + $(this).data('term'),
+				url: '4/' + $( this ).data('term'),
 				method: 'GET',
 				dataType: 'json'
 			}).done(function(response) {
@@ -120,8 +108,8 @@
 			});
 		});
 
-		$(document).on('mouseleave', '.article .term-wrapper', function() {
-			$('.tooltip', $(this)).fadeOut().remove();
+		$( document ).on('mouseleave', '.article .term-wrapper', function() {
+			$( '.tooltip', $( this ) ).fadeOut().remove();
 		});
 	});
 </script>
