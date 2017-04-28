@@ -72,21 +72,21 @@
 
 		$( document ).on('mouseenter', '.article .term-wrapper', function(e) {
 			var tooltip = $( '<div/>', { class: 'tooltip', text: '' } ),
-			widthX = $( window ).width(),
-			heightY = $( window ).height(),
-			posX = e.clientX,
-			posY = e.clientY;
+				widthX = $( window ).width(),
+				heightY = $( window ).height(),
+				posX = e.clientX,
+				posY = e.clientY;
 			
 			if (posX > widthX/2) {
-				tooltip.style.right = '0';
+				tooltip.css('right','0');
 			} else {
-				tooltip.style.left = '0';
+				tooltip.css('left','0');
 			}
 			
 			if (posY > heightY) {
-				tooltip.style.bottom = '1em';
+				tooltip.css('bottom', '1em');
 			} else {
-				tooltip.style.top = '1em';
+				tooltip.css('top', '1em');
 			}
 
 			$( this ).append(tooltip);
