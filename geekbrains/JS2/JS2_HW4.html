@@ -78,17 +78,17 @@
 			posY = e.clientY;
 			
 			if (posX > widthX/2) {
-				tooltip.style.right = 0;
+				tooltip.style.right = '0';
 			} else {
-				tooltip.style.left = 0;
+				tooltip.style.left = '0';
 			}
 			
 			if (posY > heightY) {
-				tooltip.style.bottom = 1em;
+				tooltip.style.bottom = '1em';
 			} else {
-				tooltip.style.top = 1em;
+				tooltip.style.top = '1em';
 			}
-			
+
 			$( this ).append(tooltip);
 
 			$.ajax({
