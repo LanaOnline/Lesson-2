@@ -16,6 +16,9 @@
 
             cursor: pointer;
         }
+        .form-control {
+            padding: 10px 0;
+        }
     </style>
 </head>
 <body>
@@ -31,7 +34,7 @@
                 <!-- <select class="subcategory-select">
                 <option>Выберите подкатегорию...</option>
                 </select> -->
-                <br>или создайте новую: 
+                <br>или создайте новую:<br>
                 <input class="new-category form-control" type="text"/>
                 <button class="btn btn-success btn-add-category">+</button>
             </fieldset>
@@ -69,7 +72,7 @@
 
             $( categories ).each(function(i, item) {
                 if (item.parent_id === null) {
-                    $( '.category-select' ).append($( '<option/>', { text: item.title } ));
+                    $( '.category-select' ).append($( '<option/>', { text: item.title, value: item.title } ));
                 }
             })
             
