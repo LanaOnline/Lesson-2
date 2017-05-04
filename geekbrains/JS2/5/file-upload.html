@@ -24,10 +24,22 @@
     <div class="col-md-4">
         <h2>Теги</h2>
         <form class="tags-search-form form-inline">
-            <input class="tags form-control"><button class="btn btn-success btn-add-tag">+</button>
+            <input class="tags form-control">
+            <button class="btn btn-success btn-add-tag">+</button>
         </form><br/>
         <div class="tags-suggest"></div>
         <div class="tags-selected"></div>
+        <form class="categories-form form-inline">
+            <select class="category-select">
+                <option value="null">Выберите категорию...</option>
+            </select> 
+            или создайте новую: 
+            <input type="text" name="new-category"/>
+            <button class="btn btn-success btn-add-category">+</button>
+            <!-- <select class="subcategory-select"><option>Выберите подкатегорию...</option>
+            или создайте новую <input type="text" name="new-subcategory"/><button class="btn btn-success btn-add-subcategory">+</button>
+            </select> -->
+        </form><br>
     </div>
     <div class="col-md-8">
         <h2>Файл</h2>
