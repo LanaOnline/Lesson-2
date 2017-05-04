@@ -43,7 +43,7 @@
 
         $.ajax({
             url: 'tags.json',
-            method: 'POST',
+            method: 'GET',
             dataType: 'json'
         })
         .done(function(responseTags) {
@@ -111,7 +111,7 @@
 
             $.ajax({
                 url: 'create-tag.php',
-                method: 'POST',
+                method: 'GET',
                 data: {
                     tag: tagTitle
                 },
