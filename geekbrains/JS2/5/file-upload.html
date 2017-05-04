@@ -22,26 +22,31 @@
 <h1>Загрузка файлов</h1>
 <div class="row">
     <div class="col-md-4">
-        <h2>Теги</h2>
+        <form class="categories-form form-inline">
+            <fieldset>
+            <legend>Категории</legend>
+                <select class="category-select form-control">
+                    <option value="null">Выберите категорию...</option>
+                </select> 
+                или создайте новую: 
+                <input class="new-category form-control" type="text"/>
+                <button class="btn btn-success btn-add-category">+</button>
+                <!-- <select class="subcategory-select">
+                <option>Выберите подкатегорию...</option>
+                или создайте новую <input class="new-subcategory form-control" type="text"/>
+                <button class="btn btn-success btn-add-subcategory">+</button>
+                </select> -->
+            </fieldset>
+        </form><br>
         <form class="tags-search-form form-inline">
-            <input class="tags form-control">
-            <button class="btn btn-success btn-add-tag">+</button>
+            <fieldset>
+                <legend>Теги</legend>
+                <input class="tags form-control">
+                <button class="btn btn-success btn-add-tag">+</button>
+            </fieldset>
         </form><br/>
         <div class="tags-suggest"></div>
         <div class="tags-selected"></div>
-        <form class="categories-form form-inline">
-            <select class="category-select form-control">
-                <option value="null">Выберите категорию...</option>
-            </select> 
-            или создайте новую: 
-            <input class="new-category form-control" type="text"/>
-            <button class="btn btn-success btn-add-category">+</button>
-            <!-- <select class="subcategory-select">
-            <option>Выберите подкатегорию...</option>
-            или создайте новую <input class="new-subcategory form-control" type="text"/>
-            <button class="btn btn-success btn-add-subcategory">+</button>
-            </select> -->
-        </form><br>
     </div>
     <div class="col-md-8">
         <h2>Файл</h2>
