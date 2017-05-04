@@ -27,15 +27,13 @@
             <legend>Категории</legend>
                 <select class="category-select form-control">
                     <option value="null">Выберите категорию...</option>
-                </select> 
-                или создайте новую: 
-                <input class="new-category form-control" type="text"/>
-                <button class="btn btn-success btn-add-category">+</button>
+                </select>
                 <!-- <select class="subcategory-select">
                 <option>Выберите подкатегорию...</option>
-                или создайте новую <input class="new-subcategory form-control" type="text"/>
-                <button class="btn btn-success btn-add-subcategory">+</button>
                 </select> -->
+                <br>или создайте новую: 
+                <input class="new-category form-control" type="text"/>
+                <button class="btn btn-success btn-add-category">+</button>
             </fieldset>
         </form><br>
         <form class="tags-search-form form-inline">
@@ -58,6 +56,37 @@
 <script src="js/jquery-3.2.1.js"></script>
 <script>
     $(function() {
+        // CATEGORIES
+        var categories;
+        // get categories
+        $.ajax({
+            url: 'categories.json',
+            method: 'GET',
+            dataType: 'JSON'
+        })
+        .done(function(response) {
+            categories = response;
+
+            $( categories ).each(function(i, item) {
+                if (item.parent_id === null) {
+                    $( '.category-select' ).append($( '<option/>', { text: item.title } ));
+                }
+            })
+            
+        })
+        .fail(function() {
+            alert('JSON файл с категориями не загружен!');
+        }).always(function () {
+                // .prop('disabled', false);
+                // .prop('disabled', false);
+        });
+        //update categories
+        $( '.category-select' ).change(function(){
+
+        });
+
+
+        // TAGS
         var tags;
 
         $.ajax({
@@ -69,26 +98,26 @@
             tags = responseTags;
         });
 
-        $('.tags').keyup(function() {
+        $( '.tags' ).keyup(function() {
             var selectedTags = getSelectedTags();
-            $('.tags-suggest').empty();
+            $( '.tags-suggest' ).empty();
 
-            var value = $(this).val(),
+            var value = $( this ).val(),
                 matchedTags = tags.filter(function(item) {
                 return (item.tag.indexOf(value) === 0) && selectedTags.indexOf(item.id) === -1;
             });
 
             $.each(matchedTags, function(index, item) {
-                $('.tags-suggest').append(
-                    $('<a/>', { class: 'tag-suggest', text: item.tag, 'data-id': item.id }).click(
+                $( '.tags-suggest' ).append(
+                    $( '<a/>', { class: 'tag-suggest', text: item.tag, 'data-id': item.id } ).click(
                         function(e) {
-                            var tagId = $(this).data('id');
+                            var tagId = $( this ).data('id');
                             e.preventDefault();
 
                             if (getSelectedTags().indexOf(tagId) === -1) {
-                                addTagToSelection(tagId, $(this).text());
+                                addTagToSelection(tagId, $( this ).text());
 
-                                $(this).remove();
+                                $( this ).remove();
                             }
                         }
                     )
@@ -97,32 +126,32 @@
         });
 
         function addTagToSelection(id, text) {
-            $('.tags-selected').append(
-                $('<button/>', {
+            $( '.tags-selected' ).append(
+                $( '<button/>', {
                     class: 'btn btn-default btn-small file-tag',
                     text: ' ' + text,
                     'data-id': id
-                }).prepend(
-                        $('<i/>', { class: 'fa fa-tag' })
+                } ).prepend(
+                        $( '<i/>', { class: 'fa fa-tag' } )
                 ).click(function() {
-                    $(this).remove();
+                    $( this ).remove();
                 })
             );
         }
 
         function getSelectedTags() {
             var result = [];
-            $('.tags-selected .file-tag').each(function(index, item) {
-                result.push($(item).data('id'));
+            $( '.tags-selected .file-tag' ).each(function(index, item) {
+                result.push($( item ).data('id'));
             });
 
             return result;
         }
 
-        $('.tags-search-form').submit(function(e) {
+        $( '.tags-search-form' ).submit(function(e) {
             e.preventDefault();
-            var tagsInput = $('.tags'),
-                plusButton = $('.btn-add-tag'),
+            var tagsInput = $( '.tags' ),
+                plusButton = $( '.btn-add-tag' ),
                 tagTitle = tagsInput.val();
 
             tagsInput.prop('disabled', 'disabled');
