@@ -76,8 +76,8 @@
 
             $( categories ).each(function(i, item) {
                 if (item.parent_id === null) {
-                    var itemTitle = item.title.substr(0,1).toUpperCase() + item.title.substr(1); //Capitalise selected category name
-                    $( '.category-select' ).append($( '<option/>', { text: item.title, value: itemTitle } ));
+                    var itemTitle = item.title.substr(0,1).toUpperCase() + item.title.substr(1); //Capitalize selected category name
+                    $( '.category-select' ).append($( '<option/>', { text: itemTitle, value: itemTitle } ));
                 }
             })
             
