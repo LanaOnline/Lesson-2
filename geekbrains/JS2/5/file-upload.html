@@ -39,8 +39,8 @@
                 <option>Выберите подкатегорию...</option>
                 </select> -->
                 <br>или создайте новую:<br>
-                <input class="new-category form-control" type="text"/>
-                <button class="btn btn-success btn-add-category">+</button>
+                <input class="new-title form-control" type="text"/>
+                <button class="btn btn-success btn-add-title">+</button>
             </fieldset>
         </form><br>
         <form class="tags-search-form form-inline">
@@ -69,31 +69,90 @@
         $.ajax({
             url: 'categories.json',
             method: 'GET',
-            dataType: 'JSON'
+            dataType: 'JSON'б
+            cash: false
         })
         .done(function(response) {
             categories = response;
+            var catSelect = $( '.category-select' ),
+                condition = null;
 
-            $( categories ).each(function(i, item) {
-                if (item.parent_id === null) {
-                    var itemTitle = item.title.substr(0,1).toUpperCase() + item.title.substr(1); //Capitalize selected category name
-                    $( '.category-select' ).append($( '<option/>', { text: itemTitle, value: itemTitle } ));
-                }
-            })
-            
+            addOptions(catSelect, condition);
         })
         .fail(function() {
-            alert('JSON файл с категориями не загружен!');
+            alert('Ошибка загрузки данных с категориями');
         }).always(function () {
                 // .prop('disabled', false);
                 // .prop('disabled', false);
         });
         //update categories
-        $( '.category-select' ).change(function(){
+        $( '.category-select' ).change(function() {
+            var selectedOption = $( '.category-select option' ).is('[selected]'),
+                subCatSelect = $( '<select/>', { class: 'subcategory-select'} 
+                    ).append($( '<option/>', {text: 'Выберите подкатегорию...'} )),
+                selectedId = $( selectedOption ).data('id');
 
+            addOptions(subCatSelect, selectedId);
         });
 
+        function addOptions(parentClass, condition) {
+            $( categories ).each(function(i, item) {
+                var itemTitle = item.title.substr(0,1).toUpperCase() + item.title.substr(1); //Capitalize category name
 
+                if ( item.parent_id == condition ) {
+                    $( parentClass ).append($( '<option/>', { 
+                        text: itemTitle, 
+                        value: itemTitle, 
+                        'data-id': item.id 
+                    } ));
+                }
+            });
+        }
+
+        // $( '.categories-form' ).submit(function(e) {
+        //     e.preventDefault();
+        //     var textInput = $( '.new-title' ),
+        //         plusBtn = $( '.btn-add-title' ),
+        //         catTitle = textInput.val();
+
+        //     textInput.prop('disabled', 'disabled');
+        //     plusBtn.prop('disabled', 'disabled');
+
+        //     $.ajax({
+        //         url: 'create-title.php',
+        //         method: 'GET',
+        //         data: {
+        //             title: catTitle
+        //         },
+        //         dataType: 'json'
+        //     }).done(function(response) {
+        //         var id = response.id,
+        //             parentId;//FIND PARENT ID
+
+        //         addNewTitle(id, catTitle);
+        //         categories.push({
+        //             id: id,
+        //             parent_id: parentId,//FIND PARENT ID
+        //             title: catTitle
+        //         });
+
+        //         textInput.val('');
+        //     }).fail(function() {
+        //         alert('ошибка при добавлении категории!');
+        //     }).always(function () {
+        //         textInput.prop('disabled', false);
+        //         plusBtn.prop('disabled', false);
+        //     });
+        // });
+
+        // function addNewTitle(id, text) {
+        //     $( '.category-select' ).append(
+        //         $( '<option/>', {
+        //             text: text,
+        //             'data-id': id
+        //         } )
+        //     );
+        // }
         // TAGS
         var tags;
 
