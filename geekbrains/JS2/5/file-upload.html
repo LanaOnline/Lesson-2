@@ -87,7 +87,7 @@
         });
         //update categories
         $( '.category-select' ).on('change', function() {
-            var selectedOption = $( '.category-select option' ).is('[selected="selected"]'),
+            var selectedOption = $( '.category-select option' ).find(":selected"),
                 subCatSelect = $( '<select/>', { class: 'subcategory-select'} 
                     ).append($( '<option/>', {text: 'Выберите подкатегорию...'} )),
                 selectedId = $( selectedOption ).data('id');
