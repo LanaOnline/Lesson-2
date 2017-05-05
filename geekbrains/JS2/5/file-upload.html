@@ -106,6 +106,10 @@
                         'data-id': item.id 
                     } ));
                 }
+
+                if ( condition !== null ) {
+                    $( 'category-select' ).insertAfter(parentClass);
+                }
             });
         }
 
