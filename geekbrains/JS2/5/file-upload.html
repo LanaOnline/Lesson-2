@@ -86,7 +86,7 @@
                 // .prop('disabled', false);
         });
         //update categories
-        $( '.category-select' ).change(function() {
+        $( '.category-select' ).on('change', function() {
             var selectedOption = $( '.category-select option' ).is('[selected]'),
                 subCatSelect = $( '<select/>', { class: 'subcategory-select'} 
                     ).append($( '<option/>', {text: 'Выберите подкатегорию...'} )),
