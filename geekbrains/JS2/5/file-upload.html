@@ -98,9 +98,9 @@
         });
 
         function addOptions(parentClass, condition) {
+            var hasSubs = false;
             $( categories ).each(function(i, item) {
-                var itemTitle = item.title.substr(0,1).toUpperCase() + item.title.substr(1), //Capitalize category name
-                    hasSubs = false;
+                var itemTitle = item.title.substr(0,1).toUpperCase() + item.title.substr(1); //Capitalize category name
 
                 if ( item.parent_id == condition ) {
                     $( parentClass ).append($( '<option/>', { 
