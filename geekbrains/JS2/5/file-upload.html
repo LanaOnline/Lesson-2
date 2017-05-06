@@ -33,7 +33,7 @@
             <fieldset>
             <legend>Категории</legend>
                 <select class="category-select form-control">
-                    <option value="null">Выберите категорию...</option>
+                    <option>Выберите категорию...</option>
                 </select>
                 <!-- <select class="subcategory-select">
                 <option>Выберите подкатегорию...</option>
@@ -93,10 +93,10 @@
             $( '.subcategory-select' ).remove();
             var selectedOption = $( this ).children(":selected"),
                 subCatSelect = $( '<select/>', { class: 'subcategory-select form-control'} 
-                    ).append($( '<option/>', {text: 'Выберите подкатегорию...', value: null} )),
+                    ).append($( '<option/>', {text: 'Выберите подкатегорию...'} )),
                 selectedId = $( selectedOption ).data('id');
 
-            if ( selectedOption.value != 'null') {
+            if ( selectedOption.value ) {
                 addOptions(subCatSelect, selectedId);
             }
         });
