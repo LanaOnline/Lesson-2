@@ -85,12 +85,13 @@
                 // .prop('disabled', false);
                 // .prop('disabled', false);
         });
-        //update categories
+
+        //add subcategories
         $( '.category-select' ).on('change', function() {
             $( '.subcategory-select' ).remove();
             var selectedOption = $( this ).children(":selected"),
                 subCatSelect = $( '<select/>', { class: 'subcategory-select form-control'} 
-                    ).append($( '<option/>', {text: 'Выберите подкатегорию...'} )),
+                    ).append($( '<option/>', {text: 'Выберите подкатегорию...', value: null} )),
                 selectedId = $( selectedOption ).data('id');
 
             addOptions(subCatSelect, selectedId);
@@ -100,7 +101,7 @@
             $( categories ).each(function(i, item) {
                 var itemTitle = item.title.substr(0,1).toUpperCase() + item.title.substr(1); //Capitalize category name
 
-                if ( item.parent_id == condition ) {
+                if ( item.parent_id == condition $$ item.value !== null ) {
                     $( parentClass ).append($( '<option/>', { 
                         text: itemTitle, 
                         value: itemTitle, 
