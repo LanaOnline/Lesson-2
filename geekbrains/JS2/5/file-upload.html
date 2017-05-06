@@ -101,7 +101,7 @@
             $( categories ).each(function(i, item) {
                 var itemTitle = item.title.substr(0,1).toUpperCase() + item.title.substr(1); //Capitalize category name
 
-                if ( item.parent_id == condition && item.value != null ) {
+                if ( item.parent_id == condition ) {
                     $( parentClass ).append($( '<option/>', { 
                         text: itemTitle, 
                         value: itemTitle, 
@@ -109,7 +109,7 @@
                     } ));
                 }
             });
-            if ( condition !== null ) {
+            if ( condition != null ) {
                 $( parentClass ).insertAfter($( '.category-select' ));
             }
         }
