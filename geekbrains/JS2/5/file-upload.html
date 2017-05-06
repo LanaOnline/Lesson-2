@@ -99,7 +99,8 @@
 
         function addOptions(parentClass, condition) {
             $( categories ).each(function(i, item) {
-                var itemTitle = item.title.substr(0,1).toUpperCase() + item.title.substr(1); //Capitalize category name
+                var itemTitle = item.title.substr(0,1).toUpperCase() + item.title.substr(1), //Capitalize category name
+                    hasSubs = false;
 
                 if ( item.parent_id == condition ) {
                     $( parentClass ).append($( '<option/>', { 
@@ -107,9 +108,10 @@
                         value: itemTitle, 
                         'data-id': item.id 
                     } ));
+                    hasSubs = true;
                 }
             });
-            if ( condition != null ) {
+            if ( hasSubs === true ) {
                 $( parentClass ).insertAfter($( '.category-select' ));
             }
         }
