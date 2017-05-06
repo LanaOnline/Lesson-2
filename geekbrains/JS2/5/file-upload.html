@@ -88,7 +88,6 @@
 
         //add subcategories
         $( '.category-select' ).on('change', function() {
-            var hasSubs = false;
 
             $( '.subcategory-select' ).remove();
             var selectedOption = $( this ).children(":selected"),
@@ -96,12 +95,12 @@
                     ).append($( '<option/>', {text: 'Выберите подкатегорию...'} )),
                 selectedId = $( selectedOption ).data('id');
 
-            if ( selectedOption.value ) {
-                addOptions(subCatSelect, selectedId);
-            }
+            addOptions(subCatSelect, selectedId);
         });
 
         function addOptions(parentClass, condition) {
+            var hasSubs = false;
+
             $( categories ).each(function(i, item) {
                 var itemTitle = item.title.substr(0,1).toUpperCase() + item.title.substr(1); //Capitalize category name
 
@@ -114,6 +113,7 @@
                     hasSubs = true;
                 }
             });
+            
             if ( hasSubs ) {
                 $( parentClass ).insertAfter($( '.category-select' ));
             }
