@@ -1,7 +1,0 @@
-tr:nth-child(2n) td {
-	background-color: #ddebf7;
-}
-
-td:nth-child(odd):not(:first-child) {
-	background-color: #f2f2de;
-}

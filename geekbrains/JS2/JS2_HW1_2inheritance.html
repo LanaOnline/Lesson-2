@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>JS2 HW1 inheritance Svetlana Morgun</title>
+</head>
+<body>
+	<input class="textinput" type="text"/>
+	<button id="test">Value to console</button><br>
+	<input class="textinput1" type="text"/>
+	<button id="test1">Value to console</button>
+	<script>
+	function CheckOnInput(selector) {
+		var _this = this;
+		this.toggle = document.createElement('input');
+		this.textInput = document.querySelector(selector);
+
+		this.toggle.setAttribute('type', 'checkbox');
+		this.textInput.parentNode.insertBefore(this.toggle, this.textInput);
+		this.textInput.setAttribute('disabled', 'disabled');
+		this.toggle.onchange = function() {
+			if (_this.toggle.checked) {
+				_this.enableInput();
+			} else {
+				_this.disableInput();
+			}
+		}
+	}
+
+	CheckOnInput.prototype.disableInput = function() {
+		this.textInput.value = null;
+		this.textInput.setAttribute('disabled', 'disabled');
+	}
+
+	CheckOnInput.prototype.enableInput = function() {
+		this.textInput.removeAttribute('disabled');
+	}
+
+	CheckOnInput.prototype.value = function() {
+		if (this.toggle.checked) {
+			return this.textInput.value;
+		} else {
+			return null;
+		}
+	}
+
+	function RadioOnInput(selector) {
+		CheckOnInput.call(this, selector);
+		
+		this.radioBtnY = document.createElement('input'),
+		this.radioBtnN = document.createElement('input');
+		this.textInput = document.querySelector(selector);
+
+		this.toggle.setAttribute('type', 'radio');
+		this.radioBtnY.setAttribute('type', 'radio');
+		this.radioBtnN.setAttribute('type', 'radio');
+		this.toggle.setAttribute('name', 'radiogroup');
+		this.radioBtnY.setAttribute('name', 'radiogroup');
+		this.radioBtnN.setAttribute('name', 'radiogroup');
+		this.textInput.parentNode.insertBefore(this.toggle, this.textInput);
+		this.textInput.parentNode.insertBefore(this.radioBtnN, this.toggle);
+		this.textInput.parentNode.insertBefore(this.radioBtnY, this.radioBtnN);
+
+		this.radioBtnY.onchange = this.radioBtnN.onchange = this.toggle.onchange;
+	}
+
+	RadioOnInput.prototype = Object.create(CheckOnInput.prototype);
+	RadioOnInput.prototype.constructor = RadioOnInput;
+
+	RadioOnInput.prototype.value = function() {
+		if (this.toggle.checked) {
+			return this.textInput.value;
+		} else if (this.radioBtnY.checked) {
+			return 'Yes';
+		} else if (this.radioBtnN.checked) {
+			return 'No';
+		}
+	}
+
+	var checkInput = new CheckOnInput('.textinput');
+	var radioInput = new RadioOnInput('.textinput1');
+	
+	var testButton = document.getElementById('test');
+	testButton.onclick = function() {
+		console.log(checkInput.value());
+	}
+	var testButton1 = document.getElementById('test1');
+	testButton1.onclick = function() {
+		console.log(radioInput.value());
+	}
+	</script>
+</body>
+</html>
