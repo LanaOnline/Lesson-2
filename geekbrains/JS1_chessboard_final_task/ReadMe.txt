@@ -1,21 +1,19 @@
-﻿Домашнее задание 7
-Создать функцию, генерирующую шахматную доску. При этом можно использовать любые html-тэги по своему желанию. 
-Доска должна быть разленована соответствующим образом, т.е. чередовать черные и белые ячейки. 
-Строки должны нумероваться числами от 1 до 8, столбцы – латинскими буквами A, B, C, D, E, F, G, H.
-Заполнить созданную таблицу буквами, отвечающими за шахматную фигуру, например К-король, 
-Ф – ферзь и тп., причем все фигуры должны стоять на своих местах и быть соответственно черными и белыми.
-* Заменить буквы, обозначающие фигуры картинками.
+Chessboard task
 
-Домашнее задание 8
- Используя результаты домашнего задания к предыдущему уроку, выполнить следующее. При щелчке мышью на любую 
-клетку доски – необходимо писать ее адрес в произвольное место страницы, например, в div. 
-Адрес должен извлекаться в «шахматном» формате. Например: A1, G6 и тп. При этом, ячейка, на которую 
-нажали должна помечаться произвольным образом, например, выделением рамки или другим цветом. При выделении 
-другой ячейки, предыдущая должна возвращаться к первоначальному виду.  Научиться обрабатывать стрелки 
-клавиатуры таким образом, чтобы активную ячейку из предыдущего пункта можно было перемещать по доске. 
-Если ячейка выходит за границы таблицы – она должна появиться с другой стороны. При перемещении ячейки, 
-так же должен извлекаться ее адрес.  * Добавить возможность удалять фигуры с доски и возвращать их на 
-прежнее место. Таким образом, необходимо добавить вверху и внизу таблицы область, для «уничтоженных» фигур. 
-При нажатии на любую фигуру на доске, она должна становиться «уничтоженной», т.е. удаляться с доски и 
-перемещаться в соответствующую область (черные в одну сторону, белые – в другую). При нажатии на 
-«уничтоженную» фигуру она должна вернуться на прежнее место. 
+1) Create a function that generates a chessboard. Any HTML tags can be used.
+Rows must be marked with numbers from 1 to 8, columns - with letters A, B, C, D, E, F, G, H.
+All chess pieces must be placed according to the Chess game rules.
+
+2) Provide a space to display cell's address when it's clicked (i.e. div). Address must be displayed 
+as in the game: A1, G6 and so on. A clicked cell must be visibly different from other cells 
+(have a border or a different color). When another cell is clicked the previous one must return to 
+its default state.
+
+3) Implement the option of changing the active (clicked) cell with keyboard key so that the player 
+could move the active cell around the board in vertical and horisontal directions. If the active cell 
+goes beyond the board border it must appear on the opposite side of the board. While moving the active cell update its address continuously on the display (div).
+
+4) Implement removal of chess pieces from the board and their return on their last cell by click.
+For that purpose add spaces above and under the board where removed pieces will be stored. Any piece on 
+the board when clicked must move to the appropriate space for removed peices according to its color.
+When the removed piece is clicked it must return to its last position.
