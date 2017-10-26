@@ -11,7 +11,8 @@ its default state.
 
 3) Implement the option of changing the active (clicked) cell with keyboard key so that the player 
 could move the active cell around the board in vertical and horisontal directions. If the active cell 
-goes beyond the board border it must appear on the opposite side of the board. While moving the active cell update its address continuously on the display (div).
+goes beyond the board border it must appear on the opposite side of the board. While moving the active 
+cell update its address continuously on the display (div).
 
 4) Implement removal of chess pieces from the board and their return on their last cell by click.
 For that purpose add spaces above and under the board where removed pieces will be stored. Any piece on 
